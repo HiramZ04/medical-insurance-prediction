@@ -9,9 +9,7 @@ function App() {
         <header className="header-section">
           <span className="insurance-co">Insurance CO</span>
         </header>
-        <div className="sections-scroll">
           <InferenceForm/>
-        </div>
       </div>
     </main>
   </div>

@@ -5,10 +5,8 @@ export function FormField(
   { label: string; error?: string; help?: string; children: React.ReactNode; }) {
   return (
     <div className="data-section">
-      <label className="title-container">{label}</label>
-      <div className="border-box">
-        {children}
-      </div>
+      <div className="title-container">{label}</div>
+      {children}
       {help ? <div className="field_help">{help}</div> : null}
       {error ? <div className="field_error">{error}</div> : null}
     </div>

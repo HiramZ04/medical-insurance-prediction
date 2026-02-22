@@ -4,12 +4,12 @@ const num = z.coerce.number();
 const binary = num.pipe(z.union([z.literal(0), z.literal(1)]));
 
 export const InferenceSchema = z.object({
-  age: z.coerce.number().int().min(0).max(120),
+  age: z.coerce.number().int().min(18, { message: "Age must be at least 18" }).max(120, { message: "Age must be at most 120" }),
   sex: binary,
-  dependents: z.coerce.number().int().min(0).max(20),
+  dependents: z.coerce.number().int().min(0, { message: "Dependents must be at least 0" }).max(20, { message: "Dependents must be at most 20" }),
   region: num.pipe(z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)])),
   smoker: binary,
-  bmi: z.coerce.number().min(0).max(80),
+  bmi: z.coerce.number().min(1, { message: "BMI must be at least 1" }).max(80, { message: "BMI must be at most 80" }),
 });
 
 export type InferenceInput = z.input<typeof InferenceSchema>;

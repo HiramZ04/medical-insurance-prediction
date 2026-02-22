@@ -8,8 +8,9 @@ import { runInference } from "./api";
 
 export function InferenceForm() {
   const [result, setResult] = React.useState<any>(null);
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<InferenceInput, any, InferenceRequest>({
+  const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<InferenceInput, any, InferenceRequest>({
     resolver: zodResolver(InferenceSchema),
+    mode: "onChange",
   });
 
   const onSubmit = async (data: InferenceRequest) => {
@@ -23,28 +24,32 @@ export function InferenceForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {uiFields.map((field) => {
-        const error = (errors as any)?.[field.name]?.message as string | undefined;
-        return (
-          <FieldRenderer
-            key={field.name}
-            field={field as any}
-            register={register}
-            error={error}
-          />
-        );
-      })}
-      <div className="actions">
-          <button type="submit" disabled={isSubmitting} className="button">
-            {isSubmitting ? "Running..." : "Run inference"}
-          </button>
-        </div>
+      <div className="sections-scroll">
+        {uiFields.map((field) => {
+          const error = (errors as any)?.[field.name]?.message as string | undefined;
+          return (
+            <FieldRenderer
+              key={field.name}
+              field={field as any}
+              control={control}
+              register={register}
+              error={error}
+            />
+          );
+        })}
+      </div>
+      <div className="form-bottom-wrapper">
+      <button type="submit" disabled={isSubmitting} className="submit-btn">
+        {isSubmitting ? "Running..." : "Run inference"}
+      </button>
+      </div>
 
-        {result && (
-          <div className="control" style={{ padding: "14px" }}>
-            <pre>{JSON.stringify(result, null, 2)}</pre>
-          </div>
-        )}
+      {result && (
+        <div className="control" style={{ padding: "14px" }}>
+          <pre>{JSON.stringify(result, null, 2)}</pre>
+        </div>
+      )}
     </form>
+
   );
 }
