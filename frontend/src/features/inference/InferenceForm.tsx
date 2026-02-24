@@ -3,25 +3,31 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { uiFields } from "./fields";
 import { FieldRenderer } from "../../components/FieldRenderer";
 import { InferenceSchema, type InferenceInput, type InferenceRequest, type InferenceResponse } from "./schema";
-
-const DUMMY_RESPONSE: InferenceResponse = {
-  prediction: 50000.0,
-  variation: 500,
-  other: "",
-};
+import { runInference } from "./api";
 
 interface InferenceFormProps {
   onSuccess: (result: InferenceResponse) => void;
 }
 
 export function InferenceForm({ onSuccess }: InferenceFormProps) {
+  const fieldsDefaultValues = Object.fromEntries(
+    uiFields
+      .filter((f) => "default" in f)
+      .map((f) => [f.name, f.default])
+  );
   const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<InferenceInput, any, InferenceRequest>({
     resolver: zodResolver(InferenceSchema),
     mode: "onChange",
+    defaultValues: fieldsDefaultValues
   });
 
-  const onSubmit = (_data: InferenceRequest) => {
-    onSuccess(DUMMY_RESPONSE);
+  const onSubmit = async (data: InferenceRequest) => {
+    try {
+      const response = await runInference(data);
+      onSuccess(response);
+    } catch (error) {
+      console.error("Error during inference:", error);
+    }
   };
 
   return (

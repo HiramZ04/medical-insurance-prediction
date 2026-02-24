@@ -8,7 +8,7 @@ export async function runInference(payload: InferenceRequest): Promise<Inference
   });
   
   if (!res.ok) {
-    throw new Error(`API HTTP error: ${res.statusText}`);
+    throw new Error(`Inference request failed with status ${res.status}`);
   }
   const data: InferenceResponse = await res.json();
   return data;

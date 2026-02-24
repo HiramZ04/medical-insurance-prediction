@@ -9,6 +9,7 @@ type UiField =
 export function FieldRenderer(
   { field, control, register, error }:
     { field: UiField; control: Control<InferenceInput>; register: UseFormRegister<InferenceInput>; error?: string }) {
+      // TODO: Clean up the select field error  rendering.
   const selectError = field.kind === "select"  && error ? "Select an option" : error;
   return (
     <>
