@@ -32,5 +32,6 @@ export type InferenceInput = z.input<typeof InferenceSchema>;
 export type InferenceRequest = z.infer<typeof InferenceSchema>;
 export type InferenceResponse = {
   prediction: number;
+  variation: number;
   other: string;
 };

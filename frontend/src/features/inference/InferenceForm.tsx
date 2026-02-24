@@ -1,25 +1,27 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { uiFields } from "./fields";
 import { FieldRenderer } from "../../components/FieldRenderer";
-import { InferenceSchema, type InferenceInput, type InferenceRequest } from "./schema";
-import { runInference } from "./api";
+import { InferenceSchema, type InferenceInput, type InferenceRequest, type InferenceResponse } from "./schema";
 
-export function InferenceForm() {
-  const [result, setResult] = React.useState<any>(null);
+const DUMMY_RESPONSE: InferenceResponse = {
+  prediction: 50000.0,
+  variation: 500,
+  other: "",
+};
+
+interface InferenceFormProps {
+  onSuccess: (result: InferenceResponse) => void;
+}
+
+export function InferenceForm({ onSuccess }: InferenceFormProps) {
   const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<InferenceInput, any, InferenceRequest>({
     resolver: zodResolver(InferenceSchema),
     mode: "onChange",
   });
 
-  const onSubmit = async (data: InferenceRequest) => {
-    try {
-      const response = await runInference(data);
-      setResult(response);
-    } catch (error) {
-      console.error("Error during inference:", error);
-    }
+  const onSubmit = (_data: InferenceRequest) => {
+    onSuccess(DUMMY_RESPONSE);
   };
 
   return (
@@ -39,16 +41,11 @@ export function InferenceForm() {
         })}
       </div>
       <div className="form-bottom-wrapper">
-      <button type="submit" disabled={isSubmitting} className="submit-btn">
-        {isSubmitting ? "Running..." : "Run inference"}
-      </button>
+        <button type="submit" disabled={isSubmitting} className="submit-btn">
+          {isSubmitting ? "Running..." : "Run inference"}
+        </button>
       </div>
 
-      {result && (
-        <div className="control" style={{ padding: "14px" }}>
-          <pre>{JSON.stringify(result, null, 2)}</pre>
-        </div>
-      )}
     </form>
 
   );
