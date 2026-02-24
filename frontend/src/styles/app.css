@@ -50,6 +50,18 @@ body {
   align-items: center;
   padding: 20px;
   gap: 10px;
+  border-bottom: none;
+  position: relative;
+}
+
+.header-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 1.5px;
+  background: linear-gradient(to right, transparent, rgba(117, 158, 184, 0.6) 30%, rgba(117, 158, 184, 0.6) 70%, transparent);
 }
 
 .insurance-co {
@@ -58,6 +70,15 @@ body {
   font-weight: 800;
   line-height: 1.2;
   text-align: center;
+}
+
+.insurance-sub {
+  color: rgba(18, 53, 91, 0.75);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-align: center;
+  margin-top: -6px;
 }
 
 .sections-scroll {
@@ -239,7 +260,7 @@ body {
 }
 
 .result-value {
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 700;
   color: rgba(19, 17, 18, 1);
   padding: 8px 0;
@@ -247,4 +268,113 @@ body {
 
 .result-variation {
   color: rgba(117, 158, 184, 1);
+}
+
+.pred-bar-wrapper {
+  padding: 0 25px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.pred-bar-box {
+  border: 2px solid rgba(117, 158, 184, 1);
+  border-radius: 5px;
+  padding: 16px 16px 12px 16px;
+  background-color: rgba(197, 220, 235, 0.35);
+}
+
+.pred-bar-track {
+  position: relative;
+  padding-top: 46px;
+  padding-bottom: 32px;
+}
+
+.pred-bar-gradient {
+  height: 10px;
+  border-radius: 5px;
+  background: linear-gradient(to right, rgba(197, 220, 235, 1), rgba(117, 158, 184, 1), rgba(18, 53, 91, 1));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.pred-indicator {
+  position: absolute;
+  top: 0;
+  height: 46px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pred-indicator-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(19, 17, 18, 0.85);
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.pred-indicator-stem {
+  flex: 1;
+  width: 1.5px;
+  background-color: rgba(19, 17, 18, 0.45);
+}
+
+.pred-indicator-arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid rgba(19, 17, 18, 0.55);
+}
+
+.pred-marker {
+  position: absolute;
+  top: 46px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.pred-marker-tick {
+  width: 1px;
+  height: 10px;
+  background-color: rgba(19, 17, 18, 0.3);
+}
+
+.pred-marker-label {
+  font-size: 10px;
+  color: rgba(19, 17, 18, 0.5);
+  white-space: nowrap;
+  margin-top: 4px;
+  line-height: 1;
+}
+
+.error-box {
+  margin: 10px 25px;
+  padding: 14px 16px;
+  background-color: rgba(220, 38, 38, 0.1);
+  border: 2px solid rgba(220, 38, 38, 0.7);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.error-box-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(185, 28, 28, 1);
+  letter-spacing: 0.08em;
+}
+
+.error-box-message {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(185, 28, 28, 1);
+  line-height: 1.5;
 }

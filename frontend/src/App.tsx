@@ -12,6 +12,7 @@ function App() {
       <div className="content-card">
         <header className="header-section">
           <span className="insurance-co">Insurance CO</span>
+          <span className="insurance-sub">HEALTH</span>
         </header>
           {results
             ? <ResultsPage results={results} onRunAgain={() => setResults(null)} />
