@@ -1,11 +1,11 @@
-// File should match with backend schema to ensure consistent validation on both sides
+// File should match with frontend schema to ensure consistent validation on both sides
 // Eventually we should move this to a shared package...
-import { z } from "zod";
+const { z } = require("zod");
 
 const num = z.coerce.number();
 const binary = num.pipe(z.union([z.literal(0), z.literal(1)]));
 
-export const InferenceSchema = z.object({
+const InferenceSchema = z.object({
   age: z.coerce.number().int().min(18).max(120),
   dependents: z.coerce.number().int().min(0).max(20),
   bmi: z.coerce.number().min(1).max(80),
@@ -28,9 +28,4 @@ export const InferenceSchema = z.object({
   had_major_procedure: binary,
 });
 
-export type InferenceInput = z.input<typeof InferenceSchema>;
-export type InferenceRequest = z.infer<typeof InferenceSchema>;
-export type InferenceResponse = {
-  prediction: number;
-  other: string;
-};
+module.exports = { InferenceSchema };
