@@ -35,7 +35,11 @@ async function runInference(inputData) {
   const feeds = buildFeeds(inputData);
 
   const results = await session.run(feeds);
-  return results.variable.data;
+  response = {
+    prediction: results.variable.data[0],
+    variation: 210.8555 // Calculated from notebook, unused in frontend but included just in case
+  }
+  return response;
 }
 
 module.exports = { runInference };
