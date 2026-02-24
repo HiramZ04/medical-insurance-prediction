@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 const port = 8080
+const path = require('path');
 
+const distPath = path.join(__dirname, '..', 'frontend', 'dist');
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.join(distPath, 'assets')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(distPath, 'index.html'));
 });
 
 const apiRoutes = require('./routes/api');
