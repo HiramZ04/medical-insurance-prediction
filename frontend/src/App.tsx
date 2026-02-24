@@ -1,6 +1,10 @@
+import { useState } from 'react'
+import { ResultsPage } from './features/inference/ResultsPage'
 import { InferenceForm } from './features/inference/InferenceForm'
+import type { InferenceResponse } from './features/inference/schema'
 
 function App() {
+  const [results, setResults] = useState<InferenceResponse | null>(null);
 
   return (
   <div className="page-wrapper">
@@ -9,7 +13,9 @@ function App() {
         <header className="header-section">
           <span className="insurance-co">Insurance CO</span>
         </header>
-          <InferenceForm/>
+          {results
+            ? <ResultsPage results={results} onRunAgain={() => setResults(null)} />
+            : <InferenceForm onSuccess={setResults} />}
       </div>
     </main>
   </div>

@@ -237,3 +237,14 @@ body {
     max-width: 95%;
   }
 }
+
+.result-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(19, 17, 18, 1);
+  padding: 8px 0;
+}
+
+.result-variation {
+  color: rgba(117, 158, 184, 1);
+}
