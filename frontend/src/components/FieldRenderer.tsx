@@ -25,14 +25,14 @@ export function FieldRenderer(
           <Controller
             control={control}
             name={field.name}
-            render={({ field: { value, onChange } }) => (
+            render={({ field: rhfField }) => (
               <div style={{ display: "flex", gap: "0.5rem" }}>
                 {field.options.map((option) => (
                   <button
                     key={option.value}
                     type="button"
-                    onClick={() => onChange(option.value)}
-                    className={`button ${value === option.value ? "button-selected" : "button-unselected"}`}
+                    onClick={() => rhfField.onChange(option.value)}
+                    className={`button ${rhfField.value === option.value ? "button-selected" : "button-unselected"}`}
                   >
                     {option.label}
                   </button>
