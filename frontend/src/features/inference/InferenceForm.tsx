@@ -24,6 +24,7 @@ export function InferenceForm({ onSuccess }: InferenceFormProps) {
   const onSubmit = async (data: InferenceRequest) => {
     try {
       const response = await runInference(data);
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Model is too fast! UX first!
       onSuccess(response);
     } catch (error) {
       console.error("Error during inference:", error);
