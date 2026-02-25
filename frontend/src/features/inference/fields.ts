@@ -59,7 +59,7 @@ export const uiFields = [
   { name: "visits_last_year", label: "Visits Last Year", kind: "number", input: { min: 0, max: 50, step: 1 }, default: 0 },
   { name: "hospitalizations_last_3yrs", label: "Hospitalizations (Last 3 Years)", kind: "number", input: { min: 0, max: 10, step: 1 }, default: 0 },
   { name: "medication_count", label: "Medication Count", kind: "number", input: { min: 0, max: 50, step: 1 }, default: 0 },
-  { name: "deductible", label: "Deductible", kind: "number", input: { min: 0, max: 20000, step: 1 }, default: 0 },
+  { name: "deductible", label: "Deductible", kind: "number", input: { min: 20, max: 20000, step: 1 }, default: 20 },
   { name: "copay", label: "Copay", kind: "number", input: { min: 0, max: 100, step: 1 }, default: 0 },
   { name: "chronic_count", label: "Chronic Condition Count", kind: "number", input: { min: 0, max: 10, step: 1 }, default: 0 },
   {

@@ -12,7 +12,7 @@ export const InferenceSchema = z.object({
   visits_last_year: num.int().min(0).max(50),
   hospitalizations_last_3yrs: num.int().min(0).max(10),
   medication_count: num.int().min(0).max(50),
-  deductible: num.min(0).max(20000),
+  deductible: num.min(20).max(20000),
   copay: num.min(0).max(100),
   chronic_count: num.int().min(0).max(10),
   sex: z.enum(['Female', 'Male', 'Other']),

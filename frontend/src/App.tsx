@@ -11,12 +11,15 @@ function App() {
     <main className="web-container">
       <div className="content-card">
         <header className="header-section">
-          <span className="insurance-co">Insurance CO</span>
-          <span className="insurance-sub">HEALTH</span>
+          <span className="title insurance-co">Insurance Co.</span>
+          <span className="title insurance-sub">HEALTH</span>
         </header>
-          {results
-            ? <ResultsPage results={results} onRunAgain={() => setResults(null)} />
-            : <InferenceForm onSuccess={setResults} />}
+         <div style={{ display: results ? "none" : "block" }}>
+            <InferenceForm onSuccess={setResults} />
+          </div>
+          {results && (
+              <ResultsPage results={results} onRunAgain={() => setResults(null)} />
+          )}
       </div>
     </main>
   </div>
